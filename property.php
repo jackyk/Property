@@ -1,7 +1,7 @@
 <?php
 /*Plugin Name: Property
-*Plugin URI: https://localhost
-*GitHub Plugin URI :https://github.com/jackyk/Property
+*Plugin URI: https://github.com/jackyk/Property
+*GitHub Plugin URI: https://github.com/jackyk/Property
 *Description: Check for properties and develop or buy.
 *Version: 0.0.1
 */

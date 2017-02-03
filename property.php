@@ -48,7 +48,7 @@ function your_prefix_meta_boxes( $meta_boxes ) {
             ),
             array(
                 'id'   => 'size',
-                'name' => __( 'Size in actual Acres', 'textdomain' ),
+                'name' => __( 'Size actual Acres', 'textdomain' ),
                 'type' => 'text',
                 'placeholder' =>('Enter number'),
                 'clone'  =>true,

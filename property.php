@@ -13,7 +13,8 @@ function create_property_post(){
     'public' => True,
     'label' => 'Property Manager',
     'supports' => array
-    (''),
+    ('',
+    'title'),
   );
 
 register_post_type('property_check', $args);
@@ -46,13 +47,10 @@ function your_prefix_meta_boxes( $meta_boxes ) {
             ),
             array(
                 'id'   => 'size',
-                'name' => __( 'Size in Acres', 'textdomain' ),
-                'type' => 'select',
+                'name' => __( 'Size in actual Acres', 'textdomain' ),
+                'type' => 'text',
                 'placeholder' =>('Enter number'),
-                'options' => array(
-                    'Label1' => __( 'Developed', 'textdomain' ),
-                    'Label2' => __( 'Not Developed', 'textdomain' ),
-                ),
+                'clone'  =>true,
             ),
 
         ),

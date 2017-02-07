@@ -8,8 +8,9 @@
 
 
 require (plugin_dir_path(__FILE__).'ext/meta-box/meta-box.php');
+require_once (plugin_dir_path(__FILE__).'property_check.php');
 
-function create_property_post(){
+function pwp_create_property_post(){
   $args = array(
     'public' => True,
     'label' => 'Property Manager',
@@ -17,15 +18,22 @@ function create_property_post(){
     ('',
     'title'),
   );
-
 register_post_type('property_check', $args);
 }
 
-add_action('init','create_property_post');
 
+function pwp_property_owner(){
+  $args = array(
+    'public' => True,
+    'label' => 'Property Owner',
+    'supports' => array
+    ('',
+    'title'),
+  );
+register_post_type('property_owner', $args);
+}
 
-add_filter( 'rwmb_meta_boxes', 'your_prefix_meta_boxes' );
-function your_prefix_meta_boxes( $meta_boxes ) {
+function pwp_property_post_meta( $meta_boxes ) {
     $meta_boxes[] = array(
         'title'      => __( 'Property Manager', 'textdomain' ),
         'post_types' => 'property_check',
@@ -59,5 +67,63 @@ function your_prefix_meta_boxes( $meta_boxes ) {
     return $meta_boxes;
 }
 
+function pwp_property_owner_meta(){
+  $prefix = 'owner';
+  $meta_boxes[] = array(
+    'title' => __('Property Owner', $prefix),
+    'post_types' => 'property_owner',
+    'fields' => array(
+      array(
+        'name' =>__('Users',$prefix),
+        'id'   => $prefix.'users',
+        'type' => 'user',
+        'placehoder' => 'select user',
+      ),
+      array(
+        'name' =>__('Property',$prefix),
+        'id'   => $prefix.'property_check',
+        'type' => 'post',
+        'post_types' => 'property_check',
+        'placehoder' => 'select property',
+      ),
+    ),
+  );
+  return $meta_boxes;
+}
+
+function pwp_owner(){
+  $singular = 'Owner';
+  $plural   = 'Owners';
+
+  $labels = array(
+    'name' => $singular,
+    'edit_item' => 'Edit'.$singular,
+    'menu_name' => $plural,
+  );
+
+    $args = array(
+      'hierarchical' => true,
+      'labels'   =>$labels,
+      'show_ui' =>true,
+      'show_admin_column'=> true,
+      'update_count_callback'=>'_update_post_term_count',
+      'query_var' =>true,
+      'rewrite' =>array(
+        'slug'  =>'property_owner'
+      ),
+    );
+  register_taxonomy('owner', 'property_check', $args);
+}
+
+
+
+
+add_filter( 'rwmb_meta_boxes', 'pwp_property_post_meta' );
+add_filter( 'rwmb_meta_boxes', 'pwp_property_owner_meta' );
+
+
+add_action('init', 'pwp_owner');
+add_action('init','pwp_create_property_post');
+add_action('init', 'pwp_property_owner');
 
  ?>

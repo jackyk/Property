@@ -1,24 +1,23 @@
 <?php
-
+// require_once (plugin_dir_path(__FILE__).'property.php');
 //
-// if ( defined( 'ABSPATH' ) && ! defined( 'RWMB_VER' ) ) {
-// 	require_once dirname( __FILE__ ) . '/inc/loader.php';
-// 	$loader = new RWMB_Loader;
-// 	$loader->init();
+// // creating taxanomies
+// function pwp_check_data(){
+// $args = array(
+//   'post_type' => 'property_owner',
+//   'orderby'   => 'menu_order',
+//   'order'     =>  'ASC',
+//   'no_found_rows' => true,
+//   'update_post_term_cache' => false,
+//   'post_per_post' => 10,
+//   'meta_value'=> 'Developed',
+//   );
+//
+//   $my_property = WP_Query($args);
+//   echo '<pre>';
+// var_dump($my_property);
+// echo '</pre>';
+//
 // }
-
-function create_property_post(){
-  $args = array(
-    'public' => True,
-    'label' => 'Property Manager',
-    'supports' => array
-    ('')
-  );
-
-register_post_type('property_check', $args);
-}
-
-add_action('init','create_property_post');
-
 
  ?>
